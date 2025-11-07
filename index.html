@@ -1,4 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staff Portal</title>
 <style>
+  /* ========== LOGIN OVERLAY STYLES (added) ========== */
+  #loginOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 10, 30, 0.75);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #loginBox {
+    background: rgba(255,255,255,0.98);
+    color: #002366;
+    width: 380px;
+    max-width: 92%;
+    padding: 26px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  #loginBox h2 { margin: 0 0 12px 0; font-size: 22px; }
+  #loginBox input {
+    width: 86%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #cfcfcf;
+    font-size: 15px;
+  }
+  #loginBox button {
+    margin-top: 12px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    background: #002366;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  #loginBox button:hover { opacity: 0.95; }
+  #loginError { color: #b00020; margin-top: 8px; font-weight: 700; }
+
+  /* Hide the page content behind overlay until authenticated */
+  #protectedContent { visibility: visible; } /* will be hidden by JS before auth */
+
+  /* ========== ORIGINAL CSS (unchanged) ========== */
   body {
     font-family: Arial, sans-serif;
     background: url('bbg.jpeg') no-repeat center center fixed;
@@ -243,6 +296,20 @@
 
 </head>
 <body>
+
+<!-- LOGIN OVERLAY (added) -->
+<div id="loginOverlay" aria-hidden="false">
+  <div id="loginBox" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <h2 id="loginTitle">STAFF PORTAL — Login</h2>
+    <input id="loginUser" type="text" placeholder="Username" autocomplete="username"><br>
+    <input id="loginPass" type="password" placeholder="Password" autocomplete="current-password"><br>
+    <button id="loginBtn">Login</button>
+    <div id="loginError" aria-live="polite"></div>
+  </div>
+</div>
+
+<!-- PROTECTED PAGE CONTENT (unchanged) -->
+<div id="protectedContent">
   <img src="L2.jpeg" alt="Logo" class="logo">
 
   <div class="passport-container">
@@ -255,9 +322,7 @@
   <div class="heading2">STAFF PORTAL</div>
   <div class="heading3">GUNTUR DIVISION</div>
 
-  
-
- <!-- Main Button Grid -->
+  <!-- Main Button Grid -->
   <div class="button-container">
     <!-- Expandable Button -->
     <div>
@@ -312,8 +377,6 @@
        
       </div>
     </div>
-
-
 
 <div>
       <button class="btn6" onclick="toggleSubButtons('TOTEMP')">ALL_EMPOYEES ⯆</button>
@@ -447,13 +510,55 @@
       document.querySelectorAll('.sub-buttons').forEach(sub => sub.style.display = 'none');
     }
   });
+
+  /* ========== LOGIN BEHAVIOR (added) ========== */
+  (function() {
+    const overlay = document.getElementById('loginOverlay');
+    const loginBtn = document.getElementById('loginBtn');
+    const userInput = document.getElementById('loginUser');
+    const passInput = document.getElementById('loginPass');
+    const err = document.getElementById('loginError');
+    const protectedContent = document.getElementById('protectedContent');
+
+    // Hide protected content initially to prevent flicker
+    protectedContent.style.visibility = 'hidden';
+
+    // If already logged in this session, skip login
+    if (sessionStorage.getItem('ti_logged_in') === 'true') {
+      overlay.style.display = 'none';
+      protectedContent.style.visibility = 'visible';
+    } else {
+      overlay.style.display = 'flex';
+      protectedContent.style.visibility = 'hidden';
+    }
+
+    function doLogin() {
+      const user = (userInput.value || '').trim();
+      const pass = (passInput.value || '').trim();
+
+      // exact credentials (case-sensitive)
+      if (user === 'TISTAFF' && pass === 'Vijay@9966') {
+        sessionStorage.setItem('ti_logged_in', 'true');
+        overlay.style.display = 'none';
+        protectedContent.style.visibility = 'visible';
+        err.textContent = '';
+      } else {
+        err.textContent = 'Invalid Username or Password';
+        // clear password for security
+        passInput.value = '';
+      }
+    }
+
+    // Allow Enter key to submit
+    userInput.addEventListener('keydown', function(e){ if (e.key === 'Enter') passInput.focus(); });
+    passInput.addEventListener('keydown', function(e){ if (e.key === 'Enter') doLogin(); });
+    loginBtn.addEventListener('click', doLogin);
+
+    // For accessibility, focus username on load if overlay visible
+    if (overlay.style.display !== 'none') userInput.focus();
+  })();
 </script>
 
 
 </body>
 </html>
-
-
-
-
-
