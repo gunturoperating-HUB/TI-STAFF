@@ -1,234 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>STAFF PORTAL LOGIN</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(120deg, #2980b9, #6dd5fa, #ffffff);
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.5s;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staff Portal - GNT Division</title>
 
-    /* LOGIN SCREEN */
-    #login-screen {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      width: 360px;
-      animation: fadeIn 0.8s ease-in;
-    }
+<style>
+/* ========== LOGIN SCREEN ========== */
+#loginScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #002366, #0047ab);
+  color: white;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+}
+#loginBox {
+  background: rgba(255,255,255,0.1);
+  padding: 40px 50px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.4);
+  text-align: center;
+}
+#loginBox h2 {
+  font-size: 28px;
+  margin-bottom: 25px;
+}
+input[type="text"], input[type="password"] {
+  width: 250px;
+  padding: 12px;
+  margin: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+}
+button.login-btn {
+  background: gold;
+  color: #002366;
+  font-weight: bold;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 15px;
+}
+button.login-btn:hover {
+  background: white;
+  color: #002366;
+}
+#errorMsg {
+  color: #ffcccc;
+  font-weight: bold;
+  margin-top: 10px;
+}
 
-    #login-screen h1 {
-      color: #003366;
-      font-size: 32px;
-      font-weight: bold;
-      margin-bottom: 25px;
-    }
+/* ======= ORIGINAL DESIGN BELOW ======= */
+body {
+  font-family: Arial, sans-serif;
+  background: url('bbg.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  text-align: center;
+}
+.heading1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 65px;
+  font-weight: bold;
+  text-shadow: 3px 3px 5px white;
+  color: #002366;
+  margin: 30px 0 0px 0;
+}
+.heading2 {
+  font-family: 'Bookman Old Style', serif;
+  font-size: 65px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #FFD700;
+  -webkit-text-stroke: 2px black;
+  text-shadow: 5px 5px 5px blue;
+}
+.heading3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 5px yellow;
+  color: white;
+}
+.logo {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+.passport-container {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  text-align: center;
+}
+.passport {
+  width: 150px;
+  height: 170px;
+  border: 2px solid black;
+  object-fit: cover;
+}
+.caption {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 18px;
+  font-weight: bold;
+  color: #002366;
+  margin-top: 8px;
+}
+.button-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 60px;
+  justify-items: center;
+  margin: 70px auto;
+  max-width: 75%;
+}
+button {
+  width: 300px;
+  height: 85px;
+  font-size: 24px;
+  font-family: 'Bookman Old Style', serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 14px;
+  color: #1a1a1a;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.35s ease;
+  background-size: 200% auto;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+}
+button:hover {
+  transform: scale(1.07);
+  background-position: right center;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+              0 0 40px rgba(255, 255, 255, 0.2);
+}
+.btn1 { background-image: linear-gradient(to right, #89f7fe, #66a6ff); }
+.btn2 { background-image: linear-gradient(to right, #f6d365, #fda085); }
+.btn3 { background-image: linear-gradient(to right, #a1c4fd, #c2e9fb); }
+.btn4 { background-image: linear-gradient(to right, #fbc2eb, #a6c1ee); }
+.btn5 { background-image: linear-gradient(to right, #fddb92, #d1fdff); }
+.btn6 { background-image: linear-gradient(to right, #84fab0, #8fd3f4); }
 
-    input[type="text"],
-    input[type="password"] {
-      width: 85%;
-      padding: 12px;
-      margin: 12px 0;
-      border: 1px solid #aaa;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-
-    button {
-      background: linear-gradient(45deg, #2980b9, #6dd5fa);
-      color: white;
-      border: none;
-      padding: 12px 30px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 18px;
-      font-weight: bold;
-      transition: all 0.3s;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-      background: linear-gradient(45deg, #0072ff, #00c6ff);
-    }
-
-    .error {
-      color: red;
-      font-size: 14px;
-      margin-top: 10px;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: scale(0.9);}
-      to {opacity: 1; transform: scale(1);}
-    }
-
-    /* MAIN PORTAL PAGE */
-    #main-page {
-      display: none;
-    }
-
-    /* REUSE YOUR EXISTING CSS */
-    .heading1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 65px;
-      font-weight: bold;
-      text-shadow: 3px 3px 5px white;
-      color: #002366;
-      margin: 30px 0 0px 0;
-      text-align: center;
-    }
-
-    .heading2 {
-      font-family: 'Bookman Old Style', serif;
-      font-size: 65px;
-      font-weight: bold;
-      text-transform: uppercase;
-      color: #FFD700;
-      -webkit-text-stroke: 2px black;
-      text-shadow: 5px 5px 5px blue;
-      text-align: center;
-    }
-
-    .heading3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-shadow: 3px 3px 5px yellow;
-      color: white;
-      text-align: center;
-    }
-
-    .button-container {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 40px;
-      justify-items: center;
-      margin: 50px auto;
-      max-width: 80%;
-    }
-
-    .sub-buttons {
-      display: none;
-      margin-top: 10px;
-      text-align: center;
-    }
-
-    .watermark {
-      position: fixed;
-      bottom: 10px;
-      right: 20px;
-      opacity: 0.1;
-      font-size: 120px;
-      font-weight: bold;
-      color: #0d47a1;
-      user-select: none;
-      pointer-events: none;
-    }
-
-    footer {
-      text-align: center;
-      padding: 15px;
-      background: rgba(0, 35, 102, 0.6);
-      color: white;
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-
-    footer a {
-      color: #FFD700;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  </style>
+.sub-buttons {
+  display: none;
+  margin-top: 10px;
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+.sub-buttons button {
+  width: 190px;
+  height: 45px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  background-image: linear-gradient(to right, #e0f7fa, #e1f5fe);
+  color: #003366;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+.sub-buttons button:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 15px #b3e5fc;
+}
+.scroll-text {
+  margin-top: 10px;
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 32px;
+  font-weight: bold;
+  color: #FFD700;
+  text-shadow: 3px 3px 6px #002366, 0 0 20px #fff;
+  border-top: 2px solid rgba(255,255,255,0.4);
+  border-bottom: 2px solid rgba(255,255,255,0.4);
+  padding: 15px 0;
+  background: rgba(0, 35, 102, 0.2);
+}
+.scroll-text span {
+  color: #fff;
+  text-shadow: 2px 2px 4px #000, 0 0 10px #FFD700;
+  font-style: italic;
+}
+.watermark {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  opacity: 0.1;
+  font-size: 120px;
+  font-weight: bold;
+  color: #0d47a1;
+  user-select: none;
+  pointer-events: none;
+}
+footer {
+  text-align: center;
+  padding: 15px;
+  background: rgba(0, 35, 102, 0.6);
+  color: white;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+footer a {
+  color: #FFD700;
+  text-decoration: none;
+  font-weight: bold;
+}
+footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+</style>
 </head>
+
 <body>
 
-  <!-- LOGIN SCREEN -->
-  <div id="login-screen">
-    <h1>Staff Portal Login</h1>
+<!-- ================= LOGIN SCREEN ================= -->
+<div id="loginScreen">
+  <div id="loginBox">
+    <h2>🔐 Staff Portal Login</h2>
     <input type="text" id="username" placeholder="Enter Username"><br>
     <input type="password" id="password" placeholder="Enter Password"><br>
-    <button onclick="checkLogin()">Login</button>
-    <div class="error" id="error-msg"></div>
+    <button class="login-btn" onclick="checkLogin()">Login</button>
+    <div id="errorMsg"></div>
+  </div>
+</div>
+
+<!-- ================= MAIN PORTAL (hidden initially) ================= -->
+<div id="mainContent" style="display:none;">
+  <!-- your full page content here -->
+  <!-- paste everything from your existing body starting from <img src="L2.jpeg"...> to the end -->
+  <!-- keep everything same as your design -->
+  <img src="L2.jpeg" alt="Logo" class="logo">
+  <div class="passport-container">
+    <img src="R1.jpeg" alt="Passport Photo" class="passport">
+    <div class="caption">J.SRINATH, IRTS</div>
+    <div class="caption">Sr.DOM/GNT</div>
   </div>
 
-  <!-- MAIN STAFF PORTAL -->
-  <div id="main-page">
-    <div class="heading1">OPERATING DEPARTMENT</div>
-    <div class="heading2">STAFF PORTAL</div>
-    <div class="heading3">GUNTUR DIVISION</div>
+  <div class="heading1">OPERATING DEPARTMENT</div>
+  <div class="heading2">STAFF PORTAL</div>
+  <div class="heading3">GUNTUR DIVISION</div>
 
-    <div class="button-container">
-      <div>
-        <button onclick="toggleSubButtons('staffSub')">SEARCH_EMP_BY ⯆</button>
-        <div id="staffSub" class="sub-buttons">
-          <button onclick="openSub('https://docs.google.com/spreadsheets/d/...')">NAME..</button>
-          <button onclick="openSub('https://docs.google.com/spreadsheets/d/...')">PF_NO.</button>
-        </div>
-      </div>
-    </div>
+  <!-- your same button-container block -->
+  <!-- all your buttons as provided -->
+  <!-- ... (same content as you pasted earlier) ... -->
 
-    <div class="watermark">STAFF-HUB</div>
+  <footer>
+    <p>Designed for <strong>Staff Management</strong> | Powered by 
+      <a href="https://gunturoperating-hub.github.io/TI-HOME/">Operating Department, GNT Division</a>
+    </p>
+  </footer>
 
-    <footer>
-      <p>Designed for <strong>Staff Management</strong> | Powered by 
-        <a href="https://gunturoperating-hub.github.io/TI-HOME/">
-          Operating Department, GNT Division
-        </a>
-      </p>
-    </footer>
+  <div class="scroll-text">
+    <marquee behavior="scroll" direction="LEFT" scrollamount="12">
+      🌟✨ Welcome to the <span>Operating Department </span> STAFF PORTAL <span> of Guntur Division, South Central Railway</span>  🚂💼
+    </marquee>
   </div>
+  <div class="watermark">STAFF-HUB</div>
+</div>
 
-  <script>
-    function checkLogin() {
-      const username = document.getElementById('username').value.trim();
-      const password = document.getElementById('password').value.trim();
-      const errorMsg = document.getElementById('error-msg');
+<script>
+/* ===== LOGIN LOGIC ===== */
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+  const errorMsg = document.getElementById("errorMsg");
 
-      if (username === "TISTAFF" && password === "vijay@9966") {
-        document.getElementById('login-screen').style.display = "none";
-        document.getElementById('main-page').style.display = "block";
-        document.body.style.background = "url('bbg.jpeg') no-repeat center center fixed";
-        document.body.style.backgroundSize = "cover";
-      } else {
-        errorMsg.textContent = "❌ Invalid username or password!";
-      }
-    }
+  if (user === "TISTAFF" && pass === "Vijay@9966") {
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
+  } else {
+    errorMsg.textContent = "Invalid Username or Password ❌";
+  }
+}
 
-    // Toggle Submenus
-    function toggleSubButtons(id) {
-      document.querySelectorAll('.sub-buttons').forEach(sub => {
-        if (sub.id !== id) sub.style.display = 'none';
-      });
-      const el = document.getElementById(id);
-      el.style.display = (el.style.display === "block") ? "none" : "block";
-    }
+/* your original JavaScript for buttons remains same */
+function toggleSubButtons(id) {
+  document.querySelectorAll('.sub-buttons').forEach(sub => {
+    if (sub.id !== id) sub.style.display = 'none';
+  });
+  const el = document.getElementById(id);
+  el.style.display = (el.style.display === "block") ? "none" : "block";
+}
 
-    function openSub(url) {
-      window.open(url, '_blank');
-    }
+function openSub(url, id) {
+  const submenu = document.getElementById(id);
+  if (submenu) submenu.style.display = 'none';
+  setTimeout(() => {
+    window.open(url, '_blank');
+  }, 100);
+}
 
-    // Close all menus when clicking outside
-    document.addEventListener('click', function(event) {
-      const isInsideSubmenu = event.target.closest('.sub-buttons');
-      const isMainButton = event.target.closest('button');
-      if (!isInsideSubmenu && !isMainButton) {
-        document.querySelectorAll('.sub-buttons').forEach(sub => sub.style.display = 'none');
-      }
-    });
-  </script>
+document.addEventListener('click', function(event) {
+  const isInsideSubmenu = event.target.closest('.sub-buttons');
+  const isMainButton = event.target.closest('button');
+  if (!isInsideSubmenu && !isMainButton) {
+    document.querySelectorAll('.sub-buttons').forEach(sub => sub.style.display = 'none');
+  }
+});
+</script>
 </body>
 </html>
